@@ -1,6 +1,8 @@
 package com.example.news_application
 
+import android.content.Intent
 import android.graphics.drawable.GradientDrawable
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -27,7 +29,10 @@ class NewsAdapter : ListAdapter<News, NewsAdapter.NewsViewHolder>(NewsDiffCallba
         fun bind(news: News) {
             binding.apply {
                 newsTitle.text = news.title
-                newsUrl.text = news.url
+                newsTitle.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(news.url))
+                    itemView.context.startActivity(intent)
+                }
                 newsSource.text = news.source
                 newsDate.text = news.date
                 newsKeywords.text = news.keywords.joinToString(", ")
