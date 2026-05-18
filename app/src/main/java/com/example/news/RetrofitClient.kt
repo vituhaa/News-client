@@ -7,16 +7,15 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
-object RetrofitClient {
-    private const val URL = "https://eventregistry.org/api/v1/article/getArticles"
+object SpaceNewsClient {
+    private const val BASE_URL = "https://juliayxhuang.github.io/florida-man-api"
     private const val TIMEOUT_SECONDS = 30L
 
-    private val loggingInterceptor = HttpLoggingInterceptor().apply{
+    private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-    private val okHttpClient = OkHttpClient().Builder()
+    private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
         .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -24,10 +23,14 @@ object RetrofitClient {
         .build()
 
     private val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl(URL)
+        .baseUrl(BASE_URL)
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     val apiService: ApiService = retrofit.create(ApiService::class.java)
 }
+
+
+
+

@@ -6,26 +6,25 @@ data class News(
     @SerializedName("title")
     val title: String,
 
-    @SerializedName("date")
-    val date: String,
-
-    @SerializedName("time")
-    val time: String,
-
-    @SerializedName("body")
-    val body: String,
-
     @SerializedName("url")
     val url: String,
 
-    @SerializedName("dateTimePub")
-    val dateTimePub: String,
-
     @SerializedName("source")
-    val source: Source
+    val source: Source,
+
+    @SerializedName("date")
+    val date: String,
+
+    @SerializedName("keywords")
+    val keywords: Keywords,
 )
 
 data class Source(
     @SerializedName("title")
     val title: String
+)
+
+data class Keywords(
+    @SerializedName("keywords")
+    val keywords: List<String>
 )
