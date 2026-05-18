@@ -18,14 +18,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+//            insets
+//        }
         setupRecyclerView()
         setupUI()
         loadNews()
@@ -55,9 +55,11 @@ class MainActivity : AppCompatActivity() {
             try {
                 val response = FloridaManClient.apiService.getHeadlines()
                 if (response.isSuccessful) {
-                    val news = response.body() ?: emptyList()
-                    newsAdapter.submitList(news)
-                    showContent(news.isEmpty())
+                    val news = response.body()
+                    val news_list = news?.items ?: emptyList()
+                    newsAdapter.submitList(news_list)
+                    val hasNews = news_list.isNotEmpty()
+                    showContent(hasNews)
                 } else {
                     showError("Ошибка сервера: ${response.code()}")
                 }
@@ -72,20 +74,22 @@ class MainActivity : AppCompatActivity() {
     private fun showLoading() {
         binding.progressBar.visibility = View.VISIBLE
         binding.layoutError.visibility = View.GONE
+        binding.errorText.visibility = View.GONE
         binding.layoutEmpty.visibility = View.GONE
     }
 
     private fun showContent(isEmpty: Boolean) {
         binding.progressBar.visibility = View.GONE
         binding.layoutError.visibility = View.GONE
-        binding.layoutEmpty.visibility = if (isEmpty) View.VISIBLE else View.GONE
+        binding.errorText.visibility = View.GONE
+        binding.layoutEmpty.visibility = if (isEmpty) View.GONE else View.VISIBLE
     }
 
     private fun showError(message: String) {
         binding.progressBar.visibility = View.GONE
         binding.layoutError.visibility = View.VISIBLE
         binding.layoutEmpty.visibility = View.GONE
-//        binding.tvError.text = message
+        binding.errorText.text = message
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

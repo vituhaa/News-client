@@ -9,13 +9,6 @@ import com.example.news_application.databinding.ItemNewsBinding
 import androidx.recyclerview.widget.ListAdapter
 
 class NewsAdapter : ListAdapter<News, NewsAdapter.NewsViewHolder>(NewsDiffCallback()) {
-    private val avatarColors = listOf(
-        0xFF6C63FF.toInt(), 0xFF43A047.toInt(), 0xFFE53935.toInt(),
-        0xFF1E88E5.toInt(), 0xFFFF8F00.toInt(), 0xFF8E24AA.toInt(),
-        0xFF00897B.toInt(), 0xFFD81B60.toInt(), 0xFF3949AB.toInt(),
-        0xFF00ACC1.toInt()
-    )
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val binding = ItemNewsBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
@@ -35,9 +28,9 @@ class NewsAdapter : ListAdapter<News, NewsAdapter.NewsViewHolder>(NewsDiffCallba
             binding.apply {
                 newsTitle.text = news.title
                 newsUrl.text = news.url
-//                newsSource.text = Source.title
+                newsSource.text = news.source
                 newsDate.text = news.date
-//                newsKeywords.text = news.keywords
+                newsKeywords.text = news.keywords.joinToString(", ")
             }
         }
     }
