@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">news_application</string>
-    <string name="keywords">keywords_news</string>
+    <string name="Author">Автор: %s</string>
+    <string name="Date">Дата: %s</string>
+    <string name="Source">Источник: %s</string>
 </resources>

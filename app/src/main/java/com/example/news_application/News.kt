@@ -2,26 +2,32 @@ package com.example.news_application
 import com.google.gson.annotations.SerializedName
 
 data class NewsResponse(
-    val version: Int,
-    val generatedAt: String,
-    val source: String,
-    val query: String,
-    val count: Int,
-    val items: List<News>
+    val status: String,
+    val totalResults: Int,
+    val articles: List<News>
 )
+
+data class Source(
+    val id: String,
+    val name: String
+)
+
 data class News(
+    @SerializedName("source")
+    val source: Source,
+
+    @SerializedName("author")
+    val author: String,
+
     @SerializedName("title")
     val title: String,
 
     @SerializedName("url")
     val url: String,
 
-    @SerializedName("source")
-    val source: String,
+//    @SerializedName("urlToImage")
+//    val urlToImage: String,
 
-    @SerializedName("date")
-    val date: String,
-
-    @SerializedName("keywords")
-    val keywords: List<String>
+    @SerializedName("publishedAt")
+    val publishedAt: String
 )

@@ -53,10 +53,10 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             showLoading()
             try {
-                val response = FloridaManClient.apiService.getHeadlines()
+                val response = NewsClient.apiService.getHeadlines()
                 if (response.isSuccessful) {
-                    val news = response.body()
-                    val news_list = news?.items ?: emptyList()
+                    val news_responce = response.body()
+                    val news_list = news_responce?.articles ?: emptyList()
                     newsAdapter.submitList(news_list)
                     val hasNews = news_list.isNotEmpty()
                     showContent(hasNews)

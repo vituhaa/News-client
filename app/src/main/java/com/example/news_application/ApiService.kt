@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface ApiService {
-    @GET("headlines.json")
+    @GET("top-headlines/category/health/in.json")
     suspend fun getHeadlines(): Response<NewsResponse>
 
 //    @GET("api/{MM}/{DD}.json")

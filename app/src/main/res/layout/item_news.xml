@@ -22,34 +22,30 @@
 
     <TextView
         android:id="@+id/newsSource"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:layout_marginStart="12dp"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newsTitle" />
 
     <TextView
-        android:id="@+id/newsDate"
-        android:layout_width="wrap_content"
+        android:id="@+id/newsAuthor"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:layout_marginStart="8dp"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/newsSource"
-        app:layout_constraintTop_toBottomOf="@+id/newsTitle" />
-
-    <TextView
-        android:id="@+id/newsKeywords"
-        android:text="@+strings/keywords_news"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:layout_marginTop="8dp"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newsTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/newsSource" />
+
+    <TextView
+        android:id="@+id/newsDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newsAuthor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

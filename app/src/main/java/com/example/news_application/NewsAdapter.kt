@@ -1,7 +1,7 @@
 package com.example.news_application
 
+import com.example.news_application.R
 import android.content.Intent
-import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -22,6 +22,9 @@ class NewsAdapter : ListAdapter<News, NewsAdapter.NewsViewHolder>(NewsDiffCallba
         holder.bind(getItem(position))
     }
 
+    fun cutDate(date: String): String {
+        return (date.substring(0, 10).split("-").reversed().joinToString("."))
+    }
     inner class NewsViewHolder(
         private val binding: ItemNewsBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -33,9 +36,10 @@ class NewsAdapter : ListAdapter<News, NewsAdapter.NewsViewHolder>(NewsDiffCallba
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(news.url))
                     itemView.context.startActivity(intent)
                 }
-                newsSource.text = news.source
-                newsDate.text = news.date
-                newsKeywords.text = news.keywords.joinToString(", ")
+                newsSource.text = binding.root.context.getString(R.string.Source, news.source.name)
+                newsAuthor.text = binding.root.context.getString(R.string.Author, news.author)
+                newsDate.text = binding.root.context.getString(R.string.Date, cutDate(news.publishedAt))
+//                newsDate.text = news.publishedAt
             }
         }
     }
